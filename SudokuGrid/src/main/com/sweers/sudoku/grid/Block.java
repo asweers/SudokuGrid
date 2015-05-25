@@ -34,6 +34,17 @@ public class Block extends Grid{
 		return false;
 	}
 	
+	public boolean contains(Cell cell) {
+		for(CellList row: getRows()) {
+			for(Cell blockCell : row.getCells()) {
+				if(blockCell == cell) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public List<Cell> getCellsContainingOption(Character value) {
 		List<Cell> cells = new ArrayList<Cell>();
 		for(CellList row : rows) {
@@ -44,5 +55,25 @@ public class Block extends Grid{
 			}
 		}
 		return cells;
+	}
+	
+	public List<CellList> getRowsContainingOption(Character value) {
+		List<CellList> rowList = new ArrayList<CellList>();
+		for(CellList row : rows) {
+			if(row.getCellsContainingOption(value).size() > 0){
+				rowList.add(row);
+			}
+		}
+		return rowList;
+	}
+	
+	public List<CellList> getColumnsContainingOption(Character value) {
+		List<CellList> columnList = new ArrayList<CellList>();
+		for(CellList column : columns) {
+			if(column.getCellsContainingOption(value).size() > 0){
+				columnList.add(column);
+			}
+		}
+		return columnList;
 	}
 }
